@@ -29,6 +29,7 @@ func main() {
 	}
 
 	fmt.Println("Part One:", mapFinder(patterns, Move{3, 1}))
+	fmt.Println("Part Two:", mapFinder(patterns, Move{1, 1})*mapFinder(patterns, Move{3, 1})*mapFinder(patterns, Move{5, 1})*mapFinder(patterns, Move{7, 1})*mapFinder(patterns, Move{1, 2}))
 }
 
 func mapFinder(p [][]bool, m Move) int {
