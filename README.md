@@ -1,4 +1,4 @@
-<p align='center"><img src="https://github.com/monodyle/aoc/raw/master/statics/aoc.png" style="width: 100%" /></p>
+<p align="center"><img src="https://github.com/monodyle/aoc/raw/master/statics/aoc.png" style="width: 100%" /></p>
 
 # Advent of Code Solutions
 
