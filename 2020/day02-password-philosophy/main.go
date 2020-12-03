@@ -9,6 +9,12 @@ import (
 	"github.co/monodyle/aoc/helpers"
 )
 
+// Range struct for bounds
+type Range struct {
+	min int
+	max int
+}
+
 func main() {
 	result := make(map[string]int, 2)
 	err := helpers.ScanFile("input", func(s string) error {
@@ -31,7 +37,7 @@ func main() {
 
 func validPassword(s string) (bool, bool) {
 	splitter := strings.Split(s, " ")
-	r := rangeParser(splitter[0])
+	var r Range = rangeParser(splitter[0])
 	c := rune(splitter[1][0])
 	password := splitter[2]
 
@@ -42,21 +48,18 @@ func validPassword(s string) (bool, bool) {
 		}
 	}
 
-	partOne := r["min"] <= count && r["max"] >= count
+	partOne := r.min <= count && r.max >= count
 	var letter byte = byte(c)
-	partTwo := (password[r["min"]-1] == letter && password[r["max"]-1] != letter) || (password[r["min"]-1] != letter && password[r["max"]-1] == letter)
+	partTwo := (password[r.min-1] == letter && password[r.max-1] != letter) || (password[r.min-1] != letter && password[r.max-1] == letter)
 
 	return partOne, partTwo
 }
 
-func rangeParser(r string) map[string]int {
+func rangeParser(r string) Range {
 	splitter := strings.Split(r, "-")
-	result := make(map[string]int, 2)
 
 	min, _ := strconv.Atoi(splitter[0])
-	result["min"] = min
 	max, _ := strconv.Atoi(splitter[1])
-	result["max"] = max
 
-	return result
+	return Range{min, max}
 }
