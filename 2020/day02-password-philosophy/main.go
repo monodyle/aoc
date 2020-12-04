@@ -16,14 +16,14 @@ type Range struct {
 }
 
 func main() {
-	result := make(map[string]int, 2)
+	result := []int{0, 0}
 	err := helpers.ScanFile("input", func(s string) error {
 		partOne, partTwo := validPassword(s)
 		if partOne {
-			result["partOne"]++
+			result[0]++
 		}
 		if partTwo {
-			result["partTwo"]++
+			result[1]++
 		}
 		return nil
 	})
@@ -31,8 +31,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Part One:", result["partOne"])
-	fmt.Println("Part One:", result["partTwo"])
+	fmt.Println("Part One:", result[0])
+	fmt.Println("Part One:", result[1])
 }
 
 func validPassword(s string) (bool, bool) {
