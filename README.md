@@ -15,4 +15,5 @@ My major is not computer science so someone review these codes will say: "What t
 | [Day 01: Report Repair](2020/day01-report-repair) | 317.37ms |
 | [Day 02: Password Philosophy](2020/day02-password-philosophy) | 402.80ms |
 | [Day 03: Toboggan Trajectory](2020/day03-toboggan-trajectory) | 261.75ms |
+| [Day 04: Passport Processing](2020/day04-passport-processing) | 607.40ms |
 
