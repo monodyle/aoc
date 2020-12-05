@@ -16,37 +16,71 @@ const (
 )
 
 func main() {
-	var result = []int{0, 0}
+	var partOne int = 0 // highestID
+	var partTwo int = 0
+	var passes []map[string]int
+	var lowestID int = 0
 
 	err := helpers.ScanFile("./input", func(s string) error {
-		var row = []int{0, 127}
-		var seat = []int{0, 7}
-		for i, c := range s {
-			if i < 7 {
-				if c == rlower {
-					row[1] = int(math.Floor(float64(row[0]+row[1]) / 2))
-				} else {
-					row[0] = int(math.Round(float64(row[0]+row[1]) / 2))
-				}
-			} else {
-				if c == slower {
-					seat[1] = int(math.Floor(float64(seat[0]+seat[1]) / 2))
-				} else {
-					seat[0] = int(math.Round(float64(seat[0]+seat[1]) / 2))
-				}
+		var row int = findRow(s[:7])
+		var seat int = findSeat(s[7:])
+		var ID int = row*8 + seat
+		if partOne < ID {
+			partOne = ID
+		}
+		if lowestID != 0 {
+			if lowestID > ID {
+				lowestID = ID
 			}
+		} else {
+			lowestID = ID
 		}
-
-		ID := row[0]*8 + seat[0]
-		if result[0] < ID {
-			result[0] = ID
-		}
+		passes = append(passes, map[string]int{
+			"row":  row,
+			"seat": seat,
+			"id":   ID,
+		})
 		return nil
 	})
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Part One:", result[0])
-	fmt.Println("Part Two:", result[1])
+	var length int = partOne - lowestID + 1
+	var total int = length * (lowestID + partOne) / 2 // Arithmetic progression: https://en.wikipedia.org/wiki/Arithmetic_progression
+	partTwo = total
+	for _, pass := range passes {
+		partTwo -= pass["id"]
+	}
+
+	fmt.Println("Part One:", partOne)
+	fmt.Println("Part Two:", partTwo)
+}
+
+func middle(a, b int) int {
+	return int(math.Floor(float64(a+b) / 2))
+}
+
+func findRow(s string) int {
+	var row = []int{0, 127}
+	for _, c := range s {
+		if c == rlower {
+			row[1] = middle(row[0], row[1])
+		} else {
+			row[0] = middle(row[0], row[1]) + 1
+		}
+	}
+	return row[0]
+}
+
+func findSeat(s string) int {
+	var seat = []int{0, 7}
+	for _, c := range s {
+		if c == slower {
+			seat[1] = middle(seat[0], seat[1])
+		} else {
+			seat[0] = middle(seat[0], seat[1]) + 1
+		}
+	}
+	return seat[0]
 }
