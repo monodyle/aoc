@@ -46,8 +46,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-	var length int = partOne - lowestID + 1
-	var total int = length * (lowestID + partOne) / 2 // Arithmetic progression: https://en.wikipedia.org/wiki/Arithmetic_progression
+	var total int = (partOne - lowestID + 1) * (lowestID + partOne) / 2
+	//  ^ Arithmetic progression: https://en.wikipedia.org/wiki/Arithmetic_progression
 	partTwo = total
 	for _, pass := range passes {
 		partTwo -= pass["id"]
@@ -62,25 +62,25 @@ func middle(a, b int) int {
 }
 
 func findRow(s string) int {
-	var row = []int{0, 127}
+	var l, h int = 0, 127
 	for _, c := range s {
 		if c == rlower {
-			row[1] = middle(row[0], row[1])
+			h = middle(l, h)
 		} else {
-			row[0] = middle(row[0], row[1]) + 1
+			l = middle(l, h) + 1
 		}
 	}
-	return row[0]
+	return l
 }
 
 func findSeat(s string) int {
-	var seat = []int{0, 7}
+	var l, h int = 0, 7
 	for _, c := range s {
 		if c == slower {
-			seat[1] = middle(seat[0], seat[1])
+			h = middle(l, h)
 		} else {
-			seat[0] = middle(seat[0], seat[1]) + 1
+			l = middle(l, h) + 1
 		}
 	}
-	return seat[0]
+	return l
 }

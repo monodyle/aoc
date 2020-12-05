@@ -16,4 +16,4 @@ My major is not computer science so someone review these codes will say: "What t
 | [Day 02: Password Philosophy](2020/day02-password-philosophy) | 402.80ms |
 | [Day 03: Toboggan Trajectory](2020/day03-toboggan-trajectory) | 261.75ms |
 | [Day 04: Passport Processing](2020/day04-passport-processing) | 607.40ms |
-| [Day 05: Binary Boarding](2020/day05-binary-boarding) | 354.48ms |
+| [Day 05: Binary Boarding](2020/day05-binary-boarding) | 334.55ms |
