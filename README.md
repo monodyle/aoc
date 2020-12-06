@@ -8,12 +8,11 @@ In 2020, I'm trying to learn new languages (Go, Rust,...). So I aim to have fun 
 
 My major is not computer science so someone review these codes will say: "What the hell is this??" 🤣
 
-## Runtime
+## 2020
 
-| Code | Runtime |
-| --- | ----------- |
-| [Day 01: Report Repair](2020/day01-report-repair) | 317.37ms |
-| [Day 02: Password Philosophy](2020/day02-password-philosophy) | 402.80ms |
-| [Day 03: Toboggan Trajectory](2020/day03-toboggan-trajectory) | 261.75ms |
-| [Day 04: Passport Processing](2020/day04-passport-processing) | 607.40ms |
-| [Day 05: Binary Boarding](2020/day05-binary-boarding) | 334.55ms |
+* [Day 01: Report Repair](2020/day01-report-repair)
+* [Day 02: Password Philosophy](2020/day02-password-philosophy)
+* [Day 03: Toboggan Trajectory](2020/day03-toboggan-trajectory) 
+* [Day 04: Passport Processing](2020/day04-passport-processing)
+* [Day 05: Binary Boarding](2020/day05-binary-boarding)
+* [Day 06: Custom Customs](2020/day06-custom-customs)
