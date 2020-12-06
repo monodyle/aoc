@@ -2,62 +2,40 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
-	"strings"
+
+	"github.co/monodyle/aoc/helpers"
 )
 
 func main() {
-	var result []int = []int{0, 0}
-	content, err := ioutil.ReadFile("./input")
+	var partOne int = 0
+	var partTwo int = 0
+
+	err := helpers.ScanGroups("./inputTest", func(group []string) error {
+		checker := make(map[rune]int, 26)
+
+		// Part 1
+		for _, decl := range group {
+			for _, c := range decl {
+				checker[c]++
+			}
+		}
+		partOne += len(checker)
+
+		// Part 2
+		for _, c := range checker {
+			if c == len(group) {
+				partTwo++
+			}
+		}
+
+		fmt.Printf("%v\n", checker)
+		return nil
+	})
 	if err != nil {
 		log.Fatal(err)
 	}
-	groups := strings.Split(strings.TrimSpace(string(content)), "\n\n")
 
-	for _, group := range groups {
-		result[0] += partOne(group)
-		result[1] += partTwo(group)
-	}
-
-	fmt.Println("Part One:", result[0])
-	fmt.Println("Part Two:", result[1])
-}
-
-func partOne(group string) int {
-	var result int = 0
-	var ans string = ""
-	for _, c := range strings.Replace(group, "\n", "", -1) {
-		if !strings.Contains(ans, string(c)) {
-			ans += string(c)
-		}
-	}
-	result += len(ans)
-	return result
-}
-
-func partTwo(group string) int {
-	var result int = 0
-	var ans string = ""
-
-	var decs = strings.Split(group, "\n")
-	for _, c := range strings.Replace(group, "\n", "", -1) {
-		if !strings.Contains(ans, string(c)) {
-			ans += string(c)
-		}
-	}
-
-	for _, c := range ans {
-		var count int = 0
-		for _, d := range decs {
-			if strings.ContainsRune(d, c) {
-				count++
-			}
-		}
-		if count == len(decs) {
-			result++
-		}
-	}
-
-	return result
+	fmt.Println("Part One:", partOne)
+	fmt.Println("Part Two:", partTwo)
 }
