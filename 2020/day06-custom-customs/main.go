@@ -11,7 +11,7 @@ func main() {
 	var partOne int = 0
 	var partTwo int = 0
 
-	err := helpers.ScanGroups("./inputTest", func(group []string) error {
+	err := helpers.ScanGroups("./input", func(group []string) error {
 		checker := make(map[rune]int, 26)
 
 		// Part 1
@@ -29,7 +29,6 @@ func main() {
 			}
 		}
 
-		fmt.Printf("%v\n", checker)
 		return nil
 	})
 	if err != nil {
