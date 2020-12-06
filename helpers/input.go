@@ -51,8 +51,11 @@ func ScanGroups(filepath string, f func([]string) error) error {
 	}
 
 	groups := strings.Split(strings.TrimSpace(string(content)), "\n\n")
-	if err := f(groups); err != nil {
-		return err
+	for _, group := range groups {
+		lines := strings.Split(strings.TrimSpace(string(group)), "\n")
+		if err := f(lines); err != nil {
+			return err
+		}
 	}
 
 	return nil

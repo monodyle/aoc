@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"regexp"
+	"strings"
 
 	"github.co/monodyle/aoc/helpers"
 )
@@ -13,12 +14,9 @@ func main() {
 	re := regexp.MustCompile(`(byr|iyr|eyr|hgt|hcl|ecl|pid|cid):((?:#)?\w+)`)
 
 	err := helpers.ScanGroups("./input", func(passports []string) error {
-		for _, passport := range passports {
-			matched := re.FindAllStringSubmatch(passport, -1)
-			if len(matched) < 7 || len(matched) > 8 {
-				continue
-			}
-
+		passport := strings.Join(passports, "\n")
+		matched := re.FindAllStringSubmatch(passport, -1)
+		if len(matched) == 7 || len(matched) == 8 {
 			var checker map[string]string = make(map[string]string, 8)
 			for _, field := range matched {
 				checker[field[1]] = field[2]
