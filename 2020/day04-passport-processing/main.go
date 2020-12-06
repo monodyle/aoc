@@ -27,6 +27,7 @@ func main() {
 		for _, field := range matched {
 			checker[field[1]] = field[2]
 		}
+
 		if partOne(checker) {
 			result[0]++
 			if partTwo(checker) {

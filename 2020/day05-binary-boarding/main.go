@@ -18,43 +18,39 @@ const (
 func main() {
 	var partOne int = 0 // highestID
 	var partTwo int = 0
-	var passes []map[string]int
-	var lowestID int = 0
+	var passes []int
+	var min int = 0
 
 	err := helpers.ScanFile("./input", func(s string) error {
-		var row int = findRow(s[:7])
-		var seat int = findSeat(s[7:])
-		var ID int = row*8 + seat
-		if partOne < ID {
-			partOne = ID
+		var seatID int = getSeatID(s)
+		if partOne < seatID {
+			partOne = seatID
 		}
-		if lowestID != 0 {
-			if lowestID > ID {
-				lowestID = ID
-			}
-		} else {
-			lowestID = ID
+		if min == 0 || min > seatID {
+			min = seatID
 		}
-		passes = append(passes, map[string]int{
-			"row":  row,
-			"seat": seat,
-			"id":   ID,
-		})
+		passes = append(passes, seatID)
 		return nil
 	})
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	var total int = (partOne - lowestID + 1) * (lowestID + partOne) / 2
+	var total int = (partOne - min + 1) * (min + partOne) / 2
 	//  ^ Arithmetic progression: https://en.wikipedia.org/wiki/Arithmetic_progression
 	partTwo = total
-	for _, pass := range passes {
-		partTwo -= pass["id"]
+	for _, seatID := range passes {
+		partTwo -= seatID
 	}
 
 	fmt.Println("Part One:", partOne)
 	fmt.Println("Part Two:", partTwo)
+}
+
+func getSeatID(s string) int {
+	var row int = findRow(s[:7])
+	var seat int = findSeat(s[7:])
+	return row*8 + seat
 }
 
 func middle(a, b int) int {
@@ -64,9 +60,10 @@ func middle(a, b int) int {
 func findRow(s string) int {
 	var l, h int = 0, 127
 	for _, c := range s {
-		if c == rlower {
+		switch c {
+		case rlower:
 			h = middle(l, h)
-		} else {
+		case rupper:
 			l = middle(l, h) + 1
 		}
 	}
@@ -76,9 +73,10 @@ func findRow(s string) int {
 func findSeat(s string) int {
 	var l, h int = 0, 7
 	for _, c := range s {
-		if c == slower {
+		switch c {
+		case slower:
 			h = middle(l, h)
-		} else {
+		case supper:
 			l = middle(l, h) + 1
 		}
 	}

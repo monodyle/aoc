@@ -10,12 +10,17 @@ import (
 const target = 2020
 
 func main() {
-	inputs, err := helpers.ParseInputInts("input")
+	var partOne, partTwo = solution("./input")
+	fmt.Println("Part One:", partOne)
+	fmt.Println("Part Two:", partTwo)
+}
+
+func solution(input string) (int, int) {
+	inputs, err := helpers.ParseInputInts(input)
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("Part One: ", partOne(inputs, target))
-	fmt.Println("Part Two: ", partTwo(inputs))
+	return partOne(inputs, target), partTwo(inputs)
 }
 
 func partOne(inputs []int, target int) int {
