@@ -17,8 +17,8 @@ type Range struct {
 
 func main() {
 	result := []int{0, 0}
-	err := helpers.ScanFile("input", func(s string) error {
-		partOne, partTwo := validPassword(s)
+	err := helpers.ScanLines("input", func(line string) error {
+		partOne, partTwo := validPassword(line)
 		if partOne {
 			result[0]++
 		}

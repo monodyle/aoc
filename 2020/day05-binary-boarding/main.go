@@ -21,8 +21,8 @@ func main() {
 	var passes []int
 	var min int = 0
 
-	err := helpers.ScanFile("./input", func(s string) error {
-		var seatID int = getSeatID(s)
+	err := helpers.ScanLines("./input", func(line string) error {
+		var seatID int = getSeatID(line)
 		if partOne < seatID {
 			partOne = seatID
 		}

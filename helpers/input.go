@@ -26,8 +26,8 @@ func ParseInputInts(filepath string) ([]int, error) {
 	return result, nil
 }
 
-// ScanFile read and return file line by line
-func ScanFile(filepath string, f func(s string) error) error {
+// ScanLines read and return file line by line
+func ScanLines(filepath string, f func(line string) error) error {
 	file, err := os.Open(filepath)
 	if err != nil {
 		return err
@@ -41,4 +41,19 @@ func ScanFile(filepath string, f func(s string) error) error {
 		}
 	}
 	return scanner.Err()
+}
+
+// ScanGroups read and return file line by line
+func ScanGroups(filepath string, f func([]string) error) error {
+	content, err := ioutil.ReadFile(filepath)
+	if err != nil {
+		return err
+	}
+
+	groups := strings.Split(strings.TrimSpace(string(content)), "\n\n")
+	if err := f(groups); err != nil {
+		return err
+	}
+
+	return nil
 }

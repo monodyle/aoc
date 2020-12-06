@@ -16,9 +16,9 @@ type Move struct {
 func main() {
 	const tree = '#'
 	var patterns [][]bool
-	err := helpers.ScanFile("./input", func(s string) error {
-		row := make([]bool, 0, len(s))
-		for _, block := range s {
+	err := helpers.ScanLines("./input", func(line string) error {
+		row := make([]bool, 0, len(line))
+		for _, block := range line {
 			row = append(row, block == tree)
 		}
 		patterns = append(patterns, row)
