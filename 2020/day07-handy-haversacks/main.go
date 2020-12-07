@@ -54,7 +54,7 @@ func main() {
 	}
 
 	fmt.Println("Part One:", partOne(containedBy, myBag))
-	// fmt.Println("Part Two:", partTwo)
+	fmt.Println("Part Two:", partTwo(container, myBag))
 }
 
 func slice(colorset map[string]bool) []string {
