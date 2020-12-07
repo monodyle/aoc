@@ -16,3 +16,4 @@ My major is not computer science so someone review these codes will say: "What t
 * [Day 04: Passport Processing](2020/day04-passport-processing)
 * [Day 05: Binary Boarding](2020/day05-binary-boarding)
 * [Day 06: Custom Customs](2020/day06-custom-customs)
+* [Day 07: Handy Haversacks](2020/day07-handy-haversacks)
