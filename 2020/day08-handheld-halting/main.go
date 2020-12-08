@@ -17,7 +17,7 @@ type Instruction struct {
 
 func main() {
 	machine := []Instruction{}
-	err := helpers.ScanLines("./input", func(line string) error {
+	err := helpers.ScanLines("./inputTest", func(line string) error {
 		splitter := strings.Split(line, " ")
 		value, _ := strconv.Atoi(splitter[1])
 		command := Instruction{
@@ -31,17 +31,20 @@ func main() {
 		log.Fatal(err)
 	}
 
-	partOne := partOne(machine)
+	partOne, _ := partOne(machine)
 	fmt.Println("Part One:", partOne)
-	// fmt.Println("Part Two:", partTwo)
+	fmt.Println("Part Two:", partTwo(machine))
 }
 
-func partOne(machine []Instruction) int {
+func partOne(machine []Instruction) (int, bool) {
 	var acc, i int
 	checker := make(map[int]bool, len(machine))
 	for {
-		if i == len(machine) || checker[i] {
-			return acc
+		if i == len(machine) {
+			return acc, true
+		}
+		if checker[i] {
+			return acc, false
 		}
 		checker[i] = true
 		instruct := machine[i]
@@ -56,4 +59,31 @@ func partOne(machine []Instruction) int {
 			i++
 		}
 	}
+}
+
+func partTwo(machine []Instruction) int {
+	for i, instruct := range machine {
+		var faker []Instruction
+		if instruct.operation == "nop" {
+			faker = copyCat(machine)
+			faker[i].operation = "jmp"
+		} else if instruct.operation == "jmp" {
+			faker = copyCat(machine)
+			faker[i].operation = "nop"
+		}
+
+		if faker != nil {
+			acc, complete := partOne(faker)
+			if complete {
+				return acc
+			}
+		}
+	}
+	return 0
+}
+
+func copyCat(machine []Instruction) []Instruction {
+	factory := make([]Instruction, len(machine))
+	copy(factory, machine)
+	return factory
 }
