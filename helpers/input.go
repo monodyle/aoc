@@ -15,7 +15,7 @@ func ParseInputInts(filepath string) ([]int, error) {
 		return nil, err
 	}
 	splitter := strings.Split(strings.TrimSpace(string(content)), "\n")
-	result := []int{}
+	result := make([]int, 0, len(splitter))
 	for _, l := range splitter {
 		i, err := strconv.Atoi(l)
 		if err != nil {
