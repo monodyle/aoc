@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.co/monodyle/aoc/helpers"
+	"github.co/monodyle/aoc/2020/helpers"
 )
 
 // Move of toboggan on map

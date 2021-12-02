@@ -5,7 +5,7 @@ import (
 	"log"
 	"math"
 
-	"github.co/monodyle/aoc/helpers"
+	"github.co/monodyle/aoc/2020/helpers"
 )
 
 const (
