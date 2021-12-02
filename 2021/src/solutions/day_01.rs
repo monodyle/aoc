@@ -1,12 +1,19 @@
-use crate::utils::LinesToVec32;
+use crate::utils::{LinesToUInt, Solution};
 use std::fs::read_to_string;
 
-pub fn solve() -> (u32, u32) {
-    let input = read_to_string("input/day01").unwrap().to_vec32();
-    (part_one(&input), part_two(&input))
+fn parse_input(input: String) -> Vec<usize> {
+    input.to_vec_uint()
 }
 
-fn part_one(input: &[u32]) -> u32 {
+pub fn solve() -> (Solution, Solution) {
+    let input = parse_input(read_to_string("input/day01").unwrap());
+    (
+        Solution::UInt(part_one(&input)),
+        Solution::UInt(part_two(&input)),
+    )
+}
+
+fn part_one(input: &[usize]) -> usize {
     input
         .iter()
         .enumerate()
@@ -25,23 +32,24 @@ fn part_one(input: &[u32]) -> u32 {
 
 #[test]
 fn test_part_one() {
-    let input = "199
-    200
-    208
-    210
-    200
-    207
-    240
-    269
-    260
-    263"
-    .to_string()
-    .to_vec32();
+    let input = parse_input(
+        "199
+        200
+        208
+        210
+        200
+        207
+        240
+        269
+        260
+        263"
+        .to_string(),
+    );
     assert_eq!(part_one(&input), 7);
 }
 
-fn part_two(input: &[u32]) -> u32 {
-    let sum: Vec<u32> = (0..(input.len() - 2))
+fn part_two(input: &[usize]) -> usize {
+    let sum: Vec<usize> = (0..(input.len() - 2))
         .map(|i| input[i] + input[i + 1] + input[i + 2])
         .collect();
     sum.iter()
@@ -61,17 +69,18 @@ fn part_two(input: &[u32]) -> u32 {
 
 #[test]
 fn test_part_two() {
-    let input = "199
-    200
-    208
-    210
-    200
-    207
-    240
-    269
-    260
-    263"
-    .to_string()
-    .to_vec32();
+    let input = parse_input(
+        "199
+        200
+        208
+        210
+        200
+        207
+        240
+        269
+        260
+        263"
+        .to_string(),
+    );
     assert_eq!(part_two(&input), 5);
 }

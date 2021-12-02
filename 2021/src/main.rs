@@ -1,5 +1,7 @@
 use std::{panic, time::Instant};
 
+use utils::Solution;
+
 mod solutions;
 mod utils;
 
@@ -34,9 +36,10 @@ fn main() {
     println!("\nTotal runtime: {:.4}ms", runtime);
 }
 
-fn get_day(day: u8) -> fn() -> (u32, u32) {
+fn get_day(day: u8) -> fn() -> (Solution, Solution) {
     match day {
         1 => solutions::day_01::solve,
+        2 => solutions::day_02::solve,
         _ => unimplemented!(),
     }
 }
