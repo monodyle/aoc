@@ -27,8 +27,9 @@ I'm currently learning Rust for work, so I'm trying to solve 2021 with Rust. Hop
 
 * [Day 01: Sonar Sweep](src/solutions/day_01.rs)
 * [Day 02: Dive!](src/solutions/day_02.rs)
+* [Day 03: Binary Diagnostic](src/solutions/day_03.rs)
 
-## Run the solution:
+## Run
 
 ```bash
 cargo run --release [..days]
