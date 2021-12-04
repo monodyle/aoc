@@ -41,6 +41,7 @@ fn get_day(day: u8) -> fn() -> (Solution, Solution) {
         1 => solutions::day_01::solve,
         2 => solutions::day_02::solve,
         3 => solutions::day_03::solve,
+        4 => solutions::day_04::solve,
         _ => unimplemented!(),
     }
 }
