@@ -151,8 +151,6 @@ fn part_two(caller: &Vec<usize>, boards: &mut Vec<Board>) -> usize {
     }
 
     let score = last_bingo_board.rest_sum();
-    println!("{}", score);
-    println!("{}", last_bingo_number);
     score * last_bingo_number
 }
 
