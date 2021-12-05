@@ -2,9 +2,54 @@ use std::{fs::read_to_string, vec};
 
 use crate::utils::Solution;
 
-type Board<T> = Vec<Vec<T>>;
+#[derive(Debug, Clone)]
+struct Board {
+    numbers: Vec<Vec<usize>>,
+    checker: Vec<Vec<bool>>,
+}
 
-fn parse_input(input: String) -> (Vec<usize>, Vec<Board<usize>>) {
+impl Board {
+    fn new(numbers: Vec<Vec<usize>>) -> Self {
+        let checker = vec![vec![false; 5]; 5];
+        Self { numbers, checker }
+    }
+
+    fn call_mark(&mut self, call: usize) {
+        self.numbers
+            .iter()
+            .enumerate()
+            .for_each(|(row_index, row)| {
+                row.iter().enumerate().for_each(|(number_index, number)| {
+                    if *number == call {
+                        self.checker[row_index][number_index] = true;
+                    }
+                })
+            });
+    }
+
+    fn is_bingo(&self) -> bool {
+        for i in 0..5 {
+            if self.checker[i].iter().all(|v| *v) || self.checker.iter().map(|v| v[i]).all(|v| v) {
+                return true;
+            }
+        }
+        false
+    }
+
+    fn rest_sum(&self) -> usize {
+        let mut sum = 0;
+        for (i, row) in self.numbers.iter().enumerate() {
+            for (j, item) in row.iter().enumerate() {
+                if !self.checker[i][j] {
+                    sum += item;
+                }
+            }
+        }
+        sum
+    }
+}
+
+fn parse_input(input: String) -> (Vec<usize>, Vec<Board>) {
     let mut splitter: Vec<String> = input.split("\n\n").map(|v| v.to_string()).collect();
     let caller = splitter
         .drain(0..1)
@@ -13,77 +58,48 @@ fn parse_input(input: String) -> (Vec<usize>, Vec<Board<usize>>) {
         .split(",")
         .map(|v| v.parse::<usize>().unwrap())
         .collect();
-    let boards: Vec<Board<usize>> = splitter
-        .iter()
-        .map(|v| {
-            v.trim()
-                .split("\n")
-                .map(|n| {
-                    n.trim()
-                        .split_whitespace()
-                        .map(|n| n.parse::<usize>().unwrap())
-                        .collect()
-                })
-                .collect()
-        })
-        .collect();
+    let mut boards = vec![];
+    for board in splitter {
+        let numbers = board
+            .split("\n")
+            .map(|v| {
+                v.trim()
+                    .split_whitespace()
+                    .map(|v| v.parse::<usize>().unwrap())
+                    .collect()
+            })
+            .collect();
+        boards.push(Board::new(numbers));
+    }
     (caller, boards)
 }
 
 pub fn solve() -> (Solution, Solution) {
-    let (caller, boards) = parse_input(read_to_string("input/day04").unwrap());
+    let (caller, mut boards) = parse_input(read_to_string("input/day04").unwrap());
 
     (
-        Solution::UInt(part_one(&caller, &boards)),
-        Solution::UInt(part_two(&caller, &boards)),
+        Solution::UInt(part_one(&caller, &mut boards)),
+        Solution::UInt(part_two(&caller, &mut boards)),
     )
 }
 
-fn is_bingo(board: &Board<bool>) -> bool {
-    for i in 0..5 {
-        if board[i].iter().all(|v| *v) || board.iter().map(|v| v[i]).all(|v| v) {
-            return true;
-        }
-    }
-    false
-}
-
-fn part_one(caller: &Vec<usize>, boards: &Vec<Board<usize>>) -> usize {
-    let mut check_boards: Vec<Board<bool>> = vec![vec![vec![false; 5]; 5]; boards.len()];
-    let mut bingo_number = 0;
-    let mut bingo_board = 0;
+fn part_one(caller: &Vec<usize>, boards: &mut Vec<Board>) -> usize {
+    let mut bingo_call = 0;
+    let mut bingo_index = 0;
 
     'find_bingo: for (call_index, call_number) in caller.iter().enumerate() {
-        for (board_index, board) in boards.iter().enumerate() {
-            for (row_index, row) in board.iter().enumerate() {
-                for (item_index, item) in row.iter().enumerate() {
-                    if item == call_number {
-                        check_boards[board_index][row_index][item_index] = true;
-                    }
-                }
-            }
-        }
-        if call_index >= 5 {
-            for (board_index, board) in check_boards.iter().enumerate() {
-                if is_bingo(&board) {
-                    bingo_number = caller[call_index];
-                    bingo_board = board_index;
-                    break 'find_bingo;
-                }
+        for (board_index, board) in boards.iter_mut().enumerate() {
+            board.call_mark(*call_number);
+            if call_index >= 5 && board.is_bingo() {
+                bingo_call = *call_number;
+                bingo_index = board_index;
+                break 'find_bingo;
             }
         }
     }
 
-    let mut score = 0;
-    for (row_index, row) in boards[bingo_board].iter().enumerate() {
-        for (item_index, item) in row.iter().enumerate() {
-            if !check_boards[bingo_board][row_index][item_index] {
-                score += item
-            }
-        }
-    }
-
-    score * bingo_number
+    let score = boards[bingo_index].rest_sum();
+    score * bingo_call
 }
 
 #[test]
@@ -108,53 +124,35 @@ fn test_part_one() {
     22 11 13  6  5
      2  0 12  3  7"
         .to_string();
-    let (caller, boards) = parse_input(input);
-    assert_eq!(part_one(&caller, &boards), 4512);
+    let (caller, mut boards) = parse_input(input);
+    assert_eq!(part_one(&caller, &mut boards), 4512);
 }
 
-fn part_two(caller: &Vec<usize>, boards: &Vec<Board<usize>>) -> usize {
-    let mut check_boards: Vec<Board<bool>> = vec![vec![vec![false; 5]; 5]; boards.len()];
+fn part_two(caller: &Vec<usize>, boards: &mut Vec<Board>) -> usize {
     let mut bingo_boards: Vec<usize> = vec![0];
 
-    let mut last_check_board = vec![vec![false; 5]; 5];
     let mut last_bingo_number = 0;
-    let mut last_bingo_board = 0;
+    let mut last_bingo_board: Board = Board::new(vec![vec![0; 5]; 5]);
 
     for (call_index, call_number) in caller.iter().enumerate() {
-        for (board_index, board) in boards.iter().enumerate() {
-            for (row_index, row) in board.iter().enumerate() {
-                for (item_index, item) in row.iter().enumerate() {
-                    if item == call_number {
-                        check_boards[board_index][row_index][item_index] = true;
-                    }
-                }
-            }
-        }
-
-        if call_index >= 5 {
-            for (board_index, board) in check_boards.iter().enumerate() {
+        for (board_index, board) in boards.iter_mut().enumerate() {
+            board.call_mark(*call_number);
+            if call_index >= 5 {
                 if bingo_boards.contains(&board_index) {
                     continue;
                 }
-                if is_bingo(&board) {
+                if board.is_bingo() {
                     last_bingo_number = caller[call_index];
-                    last_bingo_board = board_index;
-                    last_check_board = check_boards[board_index].clone();
-                    bingo_boards.push(last_bingo_board)
+                    last_bingo_board = board.clone();
+                    bingo_boards.push(board_index)
                 }
             }
         }
     }
 
-    let mut score = 0;
-    for (row_index, row) in boards[last_bingo_board].iter().enumerate() {
-        for (item_index, item) in row.iter().enumerate() {
-            if !last_check_board[row_index][item_index] {
-                score += item
-            }
-        }
-    }
-
+    let score = last_bingo_board.rest_sum();
+    println!("{}", score);
+    println!("{}", last_bingo_number);
     score * last_bingo_number
 }
 
@@ -180,6 +178,6 @@ fn test_part_two() {
     22 11 13  6  5
      2  0 12  3  7"
         .to_string();
-    let (caller, boards) = parse_input(input);
-    assert_eq!(part_two(&caller, &boards), 1924);
+    let (caller, mut boards) = parse_input(input);
+    assert_eq!(part_two(&caller, &mut boards), 1924);
 }
