@@ -29,6 +29,7 @@ I'm currently learning Rust for work, so I'm trying to solve 2021 with Rust. Hop
 * [Day 02: Dive!](src/solutions/day_02.rs)
 * [Day 03: Binary Diagnostic](src/solutions/day_03.rs)
 * [Day 04: Giant Squid](src/solutions/day_04.rs)
+* [Day 05: Hydrothermal Venture](src/solutions/day_05.rs)
 
 ## 🏃 Run
 
