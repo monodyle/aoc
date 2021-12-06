@@ -1,4 +1,4 @@
-use std::fmt::Display;
+use std::{fmt::Display, fs};
 
 pub enum Solution {
     Int(isize),
@@ -16,12 +16,8 @@ impl Display for Solution {
     }
 }
 
-pub trait LinesToUInt {
-    fn to_vec_uint(&self) -> Vec<usize>;
-}
-
-impl LinesToUInt for String {
-    fn to_vec_uint(&self) -> Vec<usize> {
-        self.lines().map(|l| l.trim().parse().unwrap()).collect()
-    }
+pub fn load_input(day: &str) -> String {
+    let mut path = "input/day".to_owned();
+    path.push_str(day);
+    fs::read_to_string(path).unwrap()
 }

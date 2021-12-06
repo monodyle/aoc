@@ -1,12 +1,11 @@
-use crate::utils::{LinesToUInt, Solution};
-use std::fs::read_to_string;
+use crate::utils::{Solution, load_input};
 
 fn parse_input(input: String) -> Vec<usize> {
-    input.to_vec_uint()
+    input.lines().map(|l| l.trim().parse().unwrap()).collect()
 }
 
 pub fn solve() -> (Solution, Solution) {
-    let input = parse_input(read_to_string("input/day01").unwrap());
+    let input = parse_input(load_input("01"));
     (
         Solution::UInt(part_one(&input)),
         Solution::UInt(part_two(&input)),

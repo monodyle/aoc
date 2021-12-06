@@ -1,6 +1,6 @@
-use std::{fs::read_to_string, vec};
+use std::vec;
 
-use crate::utils::Solution;
+use crate::utils::{load_input, Solution};
 
 #[derive(Debug, Clone)]
 struct Board {
@@ -75,7 +75,7 @@ fn parse_input(input: String) -> (Vec<usize>, Vec<Board>) {
 }
 
 pub fn solve() -> (Solution, Solution) {
-    let (caller, mut boards) = parse_input(read_to_string("input/day04").unwrap());
+    let (caller, mut boards) = parse_input(load_input("04"));
 
     (
         Solution::UInt(part_one(&caller, &mut boards)),

@@ -1,6 +1,4 @@
-use std::fs::read_to_string;
-
-use crate::utils::Solution;
+use crate::utils::{Solution, load_input};
 
 struct Position {
     horizon: isize,
@@ -35,7 +33,7 @@ fn parse_input(input: String) -> Vec<Direction> {
 }
 
 pub fn solve() -> (Solution, Solution) {
-    let input: Vec<Direction> = parse_input(read_to_string("input/day02").unwrap());
+    let input: Vec<Direction> = parse_input(load_input("02"));
 
     (
         Solution::Int(part_one(&input)),

@@ -1,6 +1,4 @@
-use std::fs::read_to_string;
-
-use crate::utils::Solution;
+use crate::utils::{load_input, Solution};
 
 fn parse_input(input: String) -> Vec<usize> {
     input
@@ -11,7 +9,7 @@ fn parse_input(input: String) -> Vec<usize> {
 }
 
 pub fn solve() -> (Solution, Solution) {
-    let input = parse_input(read_to_string("input/day06").unwrap());
+    let input = parse_input(load_input("06"));
 
     (
         Solution::UInt(counter(&input, 80)),

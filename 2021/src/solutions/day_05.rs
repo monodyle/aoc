@@ -1,6 +1,6 @@
-use crate::utils::Solution;
+use crate::utils::{load_input, Solution};
 
-use std::{collections::HashMap, fs::read_to_string};
+use std::collections::HashMap;
 
 #[derive(Debug, Clone, Copy, Eq, PartialEq, Hash)]
 struct Point(usize, usize);
@@ -84,7 +84,7 @@ fn parse_input(input: String) -> Vec<Segment> {
 }
 
 pub fn solve() -> (Solution, Solution) {
-    let input = parse_input(read_to_string("input/day05").unwrap());
+    let input = parse_input(load_input("05"));
     (
         Solution::UInt(part_one(&input)),
         Solution::UInt(part_two(&input)),
