@@ -18,22 +18,22 @@ fn main() {
                 .unwrap_or_else(|v| panic!("Not a valid day: {}", v))
         })
         .collect();
-    let mut runtime = 0.0;
+    let mut runtime = 0;
 
     for day in days {
         let handler = get_day(day);
         let timer = Instant::now();
         let (part_one, part_two) = handler();
-        let elapsed_ms = timer.elapsed().as_nanos() as f64 / 1_000_000_000.0;
+        let elapsed_ms = timer.elapsed().as_micros();
 
-        println!("\nRun day {:02} in {}ms:", day, elapsed_ms);
+        println!("\nRun day {:02} in {}µs:", day, elapsed_ms);
         println!("- Part one: {}", part_one);
         println!("- Part two: {}", part_two);
 
         runtime += elapsed_ms;
     }
 
-    println!("\nTotal runtime: {:.4}ms", runtime);
+    println!("\nTotal runtime: {:.4}µs", runtime);
 }
 
 fn get_day(day: u8) -> fn() -> (Solution, Solution) {

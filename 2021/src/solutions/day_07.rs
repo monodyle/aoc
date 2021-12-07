@@ -36,6 +36,12 @@ fn test_part_one() {
     assert_eq!(part_one(&input), 37);
 }
 
+/**
+ * Triangular number:
+ * a(n) = binomial(n+1,2) = n*(n+1)/2 = 0 + 1 + 2 + ... + n.
+ * https://en.wikipedia.org/wiki/Triangular_number#Formula
+ */
+
 fn part_two(input: &[usize]) -> usize {
     let max = *input.iter().max().unwrap();
     (0..=max)
@@ -45,7 +51,8 @@ fn part_two(input: &[usize]) -> usize {
                 .into_iter()
                 .map(|&pos| {
                     let steps = (pos as isize - dist as isize).abs() as usize;
-                    (1..=steps).into_iter().sum::<usize>()
+                    // (1..=steps).into_iter().sum::<usize>()
+                    steps * (steps + 1) / 2
                 })
                 .sum()
         })
