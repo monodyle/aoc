@@ -25,6 +25,7 @@ I'm currently learning Rust for work, so I'm trying to solve 2021 with Rust. Hop
 
 ## 💻 Solutions
 
+* [Day 08: Seven Segment Search](src/solutions/day_08.rs)
 * [Day 07: The Treachery of Whales](src/solutions/day_07.rs)
 * [Day 06: Lanternfish](src/solutions/day_06.rs)
 * [Day 05: Hydrothermal Venture](src/solutions/day_05.rs)
