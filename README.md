@@ -6,3 +6,4 @@ This repository is my [Advent of Code](https://adventofcode.com/) puzzle solutio
 
 * [2020](2020)
 * [2021](2021)
+* [2022](2022)
