@@ -23,7 +23,8 @@ Language: Rust
 
 ## 💻 Solutions
 
-* [Day 01: Calorie Counting](src/solutions/day_01.rs)
+* [Day 01: Calorie Counting](src/day_01)
+* [Day 02: Rock Paper Scissors](src/day_02)
 
 ## 🏃 Run
 

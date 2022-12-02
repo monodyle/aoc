@@ -3,6 +3,7 @@ use std::{panic, time::Instant};
 use aoc2022lib::Output;
 
 mod day_01;
+mod day_02;
 
 fn main() {
     let args: Vec<String> = std::env::args().collect();
@@ -39,6 +40,7 @@ fn main() {
 fn get_day(day: u8) -> fn() -> (Output, Output) {
     match day {
         1 => day_01::solve,
+        2 => day_02::solve,
         _ => unimplemented!(),
     }
 }
