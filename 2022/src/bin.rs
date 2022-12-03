@@ -4,6 +4,7 @@ use aoc2022lib::Output;
 
 mod day_01;
 mod day_02;
+mod day_03;
 
 fn main() {
     let args: Vec<String> = std::env::args().collect();
@@ -41,6 +42,7 @@ fn get_day(day: u8) -> fn() -> (Output, Output) {
     match day {
         1 => day_01::solve,
         2 => day_02::solve,
+		3 => day_03::solve,
         _ => unimplemented!(),
     }
 }
