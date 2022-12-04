@@ -3,6 +3,18 @@ use aoc2022lib::Output;
 use super::Input;
 
 pub fn solve(input: &Input) -> Output {
+    Output::U32(
+        input
+            .iter()
+            .filter(|(a, b)| (a.0 <= b.0 && a.1 >= b.1) || (b.0 <= a.0 && b.1 >= a.1))
+            .collect::<Vec<_>>()
+            .len()
+            .try_into()
+            .unwrap(),
+    )
+}
+
+/* pub fn solve(input: &Input) -> Output {
     let mut result = 0;
 
     for (first, second) in input {
@@ -14,4 +26,4 @@ pub fn solve(input: &Input) -> Output {
     }
 
     Output::U32(result)
-}
+} */

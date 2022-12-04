@@ -3,6 +3,18 @@ use aoc2022lib::Output;
 use super::Input;
 
 pub fn solve(input: &Input) -> Output {
+    Output::U32(
+        input
+            .iter()
+            .filter(|(a, b)| !(a.1 < b.0 || b.1 < a.0))
+            .collect::<Vec<_>>()
+            .len()
+            .try_into()
+            .unwrap(),
+    )
+}
+
+/* pub fn solve(input: &Input) -> Output {
     let mut non_overlap = 0;
 
     for (first, second) in input {
@@ -12,4 +24,4 @@ pub fn solve(input: &Input) -> Output {
     }
 
     Output::U32((input.len() - non_overlap).try_into().unwrap())
-}
+} */

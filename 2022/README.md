@@ -26,6 +26,7 @@ Language: Rust
 * [Day 01: Calorie Counting](src/day_01)
 * [Day 02: Rock Paper Scissors](src/day_02)
 * [Day 03: Rucksack Reorganization](src/day_03)
+* [Day 04: Camp Cleanup](src/day_04)
 
 ## 🏃 Run
 
