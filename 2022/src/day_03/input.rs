@@ -7,7 +7,7 @@ pub fn read() -> Input {
     file.trim().lines().map(|f| f.to_owned()).collect()
 }
 
-#[cfg(test)]
+/* #[cfg(test)]
 mod tests {
     use super::*;
 
@@ -26,4 +26,4 @@ mod tests {
             ]
         );
     }
-}
+} */

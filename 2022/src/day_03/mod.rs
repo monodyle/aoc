@@ -7,12 +7,12 @@ pub mod part2;
 pub type Input = Vec<String>;
 
 pub fn char_to_priority(c: char) -> u32 {
-    let mut priority = c as u32;
-    priority -= 38;
-    if priority >= 59 {
-        priority -= 58;
-    }
-	priority
+	let p = c as u32;
+	match p {
+		97..=122 => p - 96,
+        65..=90 => p - 38,
+        _ => unreachable!(),
+	}
 }
 
 pub fn solve() -> (Output, Output) {
