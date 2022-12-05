@@ -10,6 +10,6 @@ pub type Pair = (Range, Range);
 pub type Input = Vec<Pair>;
 
 pub fn solve() -> (Output, Output) {
-    let input = input::read();
-    (part1::solve(&input), part2::solve(&input))
+	let input = input::read();
+	(part1::solve(&input), part2::solve(&input))
 }

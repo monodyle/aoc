@@ -7,6 +7,6 @@ pub mod part2;
 pub type Input = Vec<u32>;
 
 pub fn solve() -> (Output, Output) {
-    let input = input::read();
-    (part1::solve(&input), part2::solve(&input))
+	let input = input::read();
+	(part1::solve(&input), part2::solve(&input))
 }
