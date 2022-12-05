@@ -8,12 +8,12 @@ pub fn read() -> Input {
 }
 
 fn parse_pair(value: &str) -> Pair {
-	let (first, second) = value.split_once(",").unwrap();
+	let (first, second) = value.split_once(',').unwrap();
 	(parse_range(first), parse_range(second))
 }
 
 fn parse_range(value: &str) -> Range {
-	let (from, to) = value.split_once("-").unwrap();
+	let (from, to) = value.split_once('-').unwrap();
 	(from.parse::<u32>().unwrap(), to.parse::<u32>().unwrap())
 }
 

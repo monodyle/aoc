@@ -4,7 +4,7 @@ pub mod input;
 pub mod part1;
 pub mod part2;
 
-#[derive(Debug, PartialEq, Clone, Copy)]
+#[derive(Debug, PartialEq, Eq, Clone, Copy)]
 pub enum Move {
     Rock,
     Paper,
@@ -21,7 +21,7 @@ impl Move {
         }
     }
 
-    pub fn to_score(&self) -> u32 {
+    pub fn to_score(self) -> u32 {
         match self {
             Move::Rock => 1,
             Move::Paper => 2,

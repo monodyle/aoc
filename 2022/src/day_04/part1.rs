@@ -7,8 +7,7 @@ pub fn solve(input: &Input) -> Output {
         input
             .iter()
             .filter(|(a, b)| (a.0 <= b.0 && a.1 >= b.1) || (b.0 <= a.0 && b.1 >= a.1))
-            .collect::<Vec<_>>()
-            .len()
+            .count()
             .try_into()
             .unwrap(),
     )

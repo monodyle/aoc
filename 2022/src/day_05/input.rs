@@ -37,7 +37,7 @@ fn parse_stack(value: &str) -> Stacks {
 fn parse_procedure(value: &str) -> Vec<Procedure> {
     value
         .lines()
-        .map(|l| l.trim().split_whitespace().collect::<Vec<&str>>())
+        .map(|l| l.split_whitespace().collect::<Vec<&str>>())
         .map(|v| {
             Procedure::new(
                 v[1].parse().unwrap(),

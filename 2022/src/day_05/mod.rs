@@ -8,7 +8,7 @@ pub mod part2;
 
 pub type Stacks = BTreeMap<u8, String>;
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct Procedure {
     pub mv: u8,
     pub fr: u8,

@@ -8,7 +8,7 @@ pub fn solve(input: &Input) -> Output {
         let their = &Move::from_str(a);
         let me = &(match b.as_str() {
             "X" => their.derive(false),
-            "Y" => their.clone(),
+            "Y" => *their,
             "Z" => their.derive(true),
             _ => unreachable!(),
         });
