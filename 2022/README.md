@@ -27,6 +27,7 @@ Language: Rust
 * [Day 02: Rock Paper Scissors](src/day_02)
 * [Day 03: Rucksack Reorganization](src/day_03)
 * [Day 04: Camp Cleanup](src/day_04)
+* [Day 05: Supply Stacks](src/day_05)
 
 ## 🏃 Run
 

@@ -17,7 +17,7 @@ fn parse_range(value: &str) -> Range {
 	(from.parse::<u32>().unwrap(), to.parse::<u32>().unwrap())
 }
 
-#[cfg(test)]
+/* #[cfg(test)]
 mod tests {
     use super::*;
 
@@ -36,4 +36,4 @@ mod tests {
             ]
         );
     }
-}
+} */

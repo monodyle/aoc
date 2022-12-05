@@ -12,7 +12,7 @@ fn parse_round(value: &str) -> (String, String) {
     (value.0.to_string(), value.1.to_string())
 }
 
-/* [cfg(test)]
+/* #[cfg(test)]
 mod tests {
     use super::*;
 
