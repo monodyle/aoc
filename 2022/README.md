@@ -28,6 +28,7 @@ Language: Rust
 * [Day 03: Rucksack Reorganization](src/day_03)
 * [Day 04: Camp Cleanup](src/day_04)
 * [Day 05: Supply Stacks](src/day_05)
+* [Day 06: Tuning Trouble](src/day_06)
 
 ## 🏃 Run
 
