@@ -29,6 +29,7 @@ Language: Rust
 * [Day 04: Camp Cleanup](src/day_04)
 * [Day 05: Supply Stacks](src/day_05)
 * [Day 06: Tuning Trouble](src/day_06)
+* [Day 07: No Space Left On Device](src/day_07)
 
 ## 🏃 Run
 
