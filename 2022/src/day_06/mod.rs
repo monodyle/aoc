@@ -1,4 +1,4 @@
-use std::collections::HashSet;
+use std::{collections::HashSet, fs};
 
 use aoc2022lib::Output;
 
@@ -21,6 +21,7 @@ pub fn get_index_of_maker(input: &Input, size: u32) -> u32 {
 }
 
 pub fn solve() -> (Output, Output) {
-	let input = input::read();
+	let raw = fs::read_to_string("./src/day_06/input.txt").unwrap();
+	let input = input::read(raw);
 	(part1::solve(&input), part2::solve(&input))
 }

@@ -1,12 +1,9 @@
-use std::fs;
-
 use super::Input;
 
-pub fn read() -> Input {
-    let file = fs::read_to_string("./src/day_07/input.txt").unwrap();
+pub fn read(value: String) -> Input {
     let mut paths = [("".to_string(), 0)].into_iter().collect::<Input>();
     let mut cwd = "".to_string();
-    for line in file.lines() {
+    for line in value.lines() {
         if let Some(dir) = line.strip_prefix("$ cd ") {
             cwd = match dir {
                 "/" => "".to_string(),
@@ -43,21 +40,22 @@ pub fn read() -> Input {
     paths
 }
 
-// #[cfg(test)]
-// mod tests {
-//     use std::collections::HashMap;
+#[cfg(test)]
+mod tests {
+    use std::{collections::HashMap, fs};
 
-//     use super::*;
+    use super::*;
 
-//     #[test]
-//     fn test_parser() {
-//         let input = read();
-//         let mut paths = HashMap::new();
-//         paths.insert("".to_string(), 48381165);
-//         paths.insert("a".to_string(), 94853);
-//         paths.insert("d".to_string(), 24933642);
-//         paths.insert("a/e".to_string(), 584);
+    #[test]
+    fn test_parser() {
+		let raw = fs::read_to_string("./src/day_07/example.txt").unwrap();
+        let input = read(raw);
+        let mut paths = HashMap::new();
+        paths.insert("".to_string(), 48381165);
+        paths.insert("a".to_string(), 94853);
+        paths.insert("d".to_string(), 24933642);
+        paths.insert("a/e".to_string(), 584);
 
-//         assert_eq!(input, paths)
-//     }
-// }
+        assert_eq!(input, paths)
+    }
+}

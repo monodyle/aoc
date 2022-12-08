@@ -1,3 +1,5 @@
+use std::fs;
+
 use aoc2022lib::Output;
 
 pub mod input;
@@ -78,6 +80,7 @@ impl Result {
 pub type Input = Vec<(String, String)>;
 
 pub fn solve() -> (Output, Output) {
-	let input = input::read();
+	let raw = fs::read_to_string("./src/day_02/input.txt").unwrap();
+	let input = input::read(raw);
 	(part1::solve(&input), part2::solve(&input))
 }

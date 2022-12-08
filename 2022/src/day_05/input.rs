@@ -1,13 +1,9 @@
-use std::{
-	collections::{btree_map::Entry, BTreeMap},
-	fs,
-};
+use std::collections::{btree_map::Entry, BTreeMap};
 
 use super::{Input, Procedure, Stacks};
 
-pub fn read() -> Input {
-	let file = fs::read_to_string("./src/day_05/input.txt").unwrap();
-	let (stack, procedure) = file.trim_end().split_once("\n\n").unwrap();
+pub fn read(value: String) -> Input {
+	let (stack, procedure) = value.trim_end().split_once("\n\n").unwrap();
 	(parse_stack(stack), parse_procedure(procedure))
 }
 
@@ -48,13 +44,16 @@ fn parse_procedure(value: &str) -> Vec<Procedure> {
 		.collect()
 }
 
-/* #[cfg(test)]
+#[cfg(test)]
 mod tests {
+	use std::fs;
+
 	use super::*;
 
 	#[test]
 	fn test_parser() {
-		let input = read();
+		let file = fs::read_to_string("./src/day_05/example.txt").unwrap();
+		let input = read(file);
 
 		let mut stacks: Stacks = BTreeMap::new();
 		stacks.insert(1, "NZ".to_owned());
@@ -69,4 +68,4 @@ mod tests {
 
 		assert_eq!(input, (stacks, rearrangement));
 	}
-} */
+}

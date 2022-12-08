@@ -1,10 +1,7 @@
-use std::fs;
-
 use super::Input;
 
-pub fn read() -> Input {
-	let file = fs::read_to_string("./src/day_01/input.txt").unwrap();
-	file.trim().split("\n\n").map(parse_calories).collect()
+pub fn read(input: String) -> Input {
+	input.trim().split("\n\n").map(parse_calories).collect()
 }
 
 fn parse_calories(value: &str) -> u32 {

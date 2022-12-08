@@ -1,10 +1,7 @@
-use std::fs;
-
 use super::{Input, Pair, Range};
 
-pub fn read() -> Input {
-	let file = fs::read_to_string("./src/day_04/input.txt").unwrap();
-	file.trim().lines().map(parse_pair).collect()
+pub fn read(input: String) -> Input {
+	input.trim().lines().map(parse_pair).collect()
 }
 
 fn parse_pair(value: &str) -> Pair {
@@ -17,23 +14,26 @@ fn parse_range(value: &str) -> Range {
 	(from.parse::<u32>().unwrap(), to.parse::<u32>().unwrap())
 }
 
-/* #[cfg(test)]
+#[cfg(test)]
 mod tests {
+	use std::fs;
+
 	use super::*;
 
 	#[test]
 	fn test_parser() {
-		let input = read();
+		let file = fs::read_to_string("./src/day_04/example.txt").unwrap();
+		let input = read(file);
 		assert_eq!(
 			input,
 			vec![
-				((2,4),(6,8)),
-				((2,3),(4,5)),
-				((5,7),(7,9)),
-				((2,8),(3,7)),
-				((6,6),(4,6)),
-				((2,6),(4,8)),
+				((2, 4), (6, 8)),
+				((2, 3), (4, 5)),
+				((5, 7), (7, 9)),
+				((2, 8), (3, 7)),
+				((6, 6), (4, 6)),
+				((2, 6), (4, 8)),
 			]
 		);
 	}
-} */
+}

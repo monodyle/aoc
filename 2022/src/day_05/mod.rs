@@ -1,4 +1,4 @@
-use std::collections::BTreeMap;
+use std::{collections::BTreeMap, fs};
 
 use aoc2022lib::Output;
 
@@ -32,6 +32,7 @@ pub fn get_to_of_stacks(stacks: Stacks) -> String {
 }
 
 pub fn solve() -> (Output, Output) {
-	let input = input::read();
+	let raw = fs::read_to_string("./src/day_05/input.txt").unwrap();
+	let input = input::read(raw);
 	(part1::solve(&input), part2::solve(&input))
 }
