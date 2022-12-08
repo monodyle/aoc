@@ -9,6 +9,7 @@ mod day_04;
 mod day_05;
 mod day_06;
 mod day_07;
+mod day_08;
 
 fn main() {
 	let args: Vec<String> = std::env::args().collect();
@@ -51,6 +52,7 @@ fn get_day(day: u8) -> fn() -> (Output, Output) {
 		5 => day_05::solve,
 		6 => day_06::solve,
 		7 => day_07::solve,
+		8 => day_08::solve,
 		_ => unimplemented!(),
 	}
 }

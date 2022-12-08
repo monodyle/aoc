@@ -30,6 +30,7 @@ Language: Rust
 * [Day 05: Supply Stacks](src/day_05)
 * [Day 06: Tuning Trouble](src/day_06)
 * [Day 07: No Space Left On Device](src/day_07)
+* [Day 08: Treetop Tree House](src/day_08)
 
 ## 🏃 Run
 
